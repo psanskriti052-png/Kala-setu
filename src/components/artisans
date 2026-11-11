@@ -1,0 +1,32 @@
+import { ChevronRight, MapPin } from 'lucide-react';
+import { Image } from '@/components/ui/image';
+
+export default function ArtisanCard({ artisan, onSelect }) {
+  return (
+    <button
+      type="button"
+      onClick={() => onSelect(artisan)}
+      className="flex w-full items-center gap-3 rounded-2xl border border-kala-line bg-kala-cream p-3 text-left transition-colors hover:border-kala-gold"
+    >
+      <Image
+        src={artisan.image}
+        alt={`Work by ${artisan.name}`}
+        className="h-20 w-20 shrink-0 rounded-xl object-cover"
+        fittingType="fill"
+        loading="lazy"
+      />
+      <div className="min-w-0">
+        <p className="font-display text-base leading-tight text-kala-maroon">{artisan.name}</p>
+        <p className="mt-0.5 flex items-center gap-1 text-xs text-kala-muted">
+          <MapPin className="h-3 w-3" aria-hidden="true" />
+          {artisan.village}
+        </p>
+        <p className="mt-1 text-xs text-kala-ink/80">
+          {artisan.craft} · {artisan.years} yrs
+        </p>
+        <p className="mt-1 text-xs font-semibold text-kala-terracotta">{artisan.priceRange}</p>
+      </div>
+      <ChevronRight className="ml-auto h-4 w-4 shrink-0 text-kala-muted" aria-hidden="true" />
+    </button>
+  );
+}
