@@ -1,0 +1,219 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Kala Setu heritage palette */
+    --kala-peach: #fce8dc;
+    --kala-cream: #fff8f2;
+    --kala-maroon: #7a2e1f;
+    --kala-terracotta: #b5392f;
+    --kala-gold: #d4a24c;
+    --kala-ink: #3b2417;
+
+    --background: 22 84% 93%;
+    --foreground: 14 45% 17%;
+    --card: 30 100% 98%;
+    --card-foreground: 14 45% 17%;
+    --popover: 30 100% 98%;
+    --popover-foreground: 14 45% 17%;
+    --primary: 5 59% 45%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 22 70% 90%;
+    --secondary-foreground: 10 60% 30%;
+    --muted: 24 45% 91%;
+    --muted-foreground: 16 26% 38%;
+    --accent: 38 61% 56%;
+    --accent-foreground: 14 45% 17%;
+    --destructive: 0 72% 42%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 22 42% 86%;
+    --input: 22 42% 86%;
+    --ring: 5 59% 45%;
+    --chart-1: 5 59% 45%;
+    --chart-2: 38 61% 56%;
+    --chart-3: 10 60% 30%;
+    --chart-4: 18 55% 55%;
+    --chart-5: 33 45% 40%;
+    --radius: 1rem;
+    --font-heading: "Fraunces", Georgia, "Times New Roman", serif;
+    --font-body: "DM Sans", system-ui, -apple-system, sans-serif;
+    --font-display: "Fraunces", Georgia, "Times New Roman", serif;
+    --font-mono: ui-monospace, SFMono-Regular, Menlo, monospace;
+    --sidebar-background: 30 100% 98%;
+    --sidebar-foreground: 10 60% 30%;
+    --sidebar-primary: 5 59% 45%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 24 60% 92%;
+    --sidebar-accent-foreground: 10 60% 30%;
+    --sidebar-border: 22 42% 86%;
+    --sidebar-ring: 5 59% 45%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  body {
+    @apply bg-background text-foreground font-body;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-heading);
+  }
+}
+
+/* ---------- Motion ---------- */
+@keyframes kala-rise {
+  from {
+    opacity: 0;
+    transform: translateY(1.1rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes kala-rise-photo {
+  from {
+    opacity: 0;
+    transform: translateY(2rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes kala-letter-tint {
+  0%,
+  22%,
+  100% {
+    color: var(--kala-maroon);
+  }
+  11% {
+    color: var(--kala-terracotta);
+  }
+}
+
+@keyframes kala-scan-line {
+  0% {
+    top: 4%;
+  }
+  50% {
+    top: 92%;
+  }
+  100% {
+    top: 4%;
+  }
+}
+
+@keyframes kala-shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes kala-pulse-ring {
+  0% {
+    transform: scale(0.75);
+    opacity: 0.75;
+  }
+  70% {
+    transform: scale(1.9);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1.9);
+    opacity: 0;
+  }
+}
+
+@keyframes kala-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(0.85rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@layer utilities {
+  .rise {
+    animation: kala-rise 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  }
+
+  .rise-photo {
+    animation: kala-rise-photo 0.85s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  }
+
+  .fade-up {
+    animation: kala-fade-up 0.5s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  }
+
+  .sheet-in {
+    animation: kala-fade-up 0.32s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  }
+
+  .hero-letter {
+    animation: kala-letter-tint 5.5s linear infinite;
+    animation-delay: calc(var(--i, 0) * 0.055s);
+  }
+
+  .scan-line {
+    animation: kala-scan-line 2.1s ease-in-out infinite;
+  }
+
+  .hotspot-ring {
+    animation: kala-pulse-ring 2.2s cubic-bezier(0.2, 0.7, 0.2, 1) infinite;
+  }
+
+  .shimmer {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .shimmer::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    transform: translateX(-100%);
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.65),
+      transparent
+    );
+    animation: kala-shimmer 1.6s infinite;
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rise,
+  .rise-photo,
+  .fade-up,
+  .hero-letter,
+  .scan-line,
+  .hotspot-ring,
+  .shimmer::after {
+    animation: none !important;
+  }
+}
